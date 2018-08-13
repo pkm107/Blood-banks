@@ -1,0 +1,63 @@
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand">Well come to Blood bank database</a>
+      </div>
+      <ul class="nav navbar-nav">
+          <p class="navbar-text">Search a Govt. Regd. Blood bank in your city.</p>
+      </ul>
+    </div>
+  </nav>
+  <div class="container">   
+    <label class="radio-inline"><input type="radio" name="searchtype" (click)="onCheck(1)" checked>Search by pin</label>
+    <label class="radio-inline"><input type="radio" name="searchtype" (click)="onCheck(2)">Search by city</label>
+ <br><br>
+  <div class="row" *ngIf="isState">
+    <div class="col-sm-4">
+      <select name="ddState" class="form-control" id="ddState" (change)="onChangeState($event)">
+        <option value="">Select state</option>
+        <option *ngFor="let s of states" value="{{s}}">{{s}}</option>
+      </select>
+    </div>
+    <div class="col-sm-4">
+      <select name="ddCity" class="form-control" id="ddCity" (change)="onChangeCity($event)">
+        <option value="">Select city</option>
+        <option *ngFor="let c of cities" value="{{c}}">{{c}}</option>
+      </select>
+    </div>
+    <div class="col-sm-4">
+      <input type="button" class="btn btn-primary" name="btnSubmit" value="Search" (click)="onSubmit(state,city)">
+    </div>    
+  </div> 
+  <div class="row" *ngIf="!isState">
+    <div class="col-sm-4">
+        <input type="text" class="form-control" placeholder="Pin Code" name="pin" id="pin" (input)="onChangePin($event)">
+    </div>     
+  </div> <br>
+
+  <div class="row" style="height: 570px;overflow: scroll;overflow-y: hidden;overflow-x: hidden"
+  #scr [scrollTop]="scrollH">
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let bb of bbs | slice:0:reccount;let i = index">        
+          <div class="row">
+              <div class="col-sm-6">
+                  Name : <b>{{bb._blood_bank_name}}</b> <br>
+                  Address : <b>{{bb.__address}}</b><br>
+                  State : <b>{{bb.__state}}</b> - <b>{{bb._pincode}}</b>  <br>  
+                  <b>Nodal Officer</b> : <b>{{bb.__nodal_officer_}}</b><br>
+                  Email : <b>{{bb.__email_nodal_officer}}</b><br>
+                  Contact No. : <b>{{bb.__contact_no}} / {{bb._mobile}} / {{bb._contact_nodal_officer}}</b><br>
+              </div>
+              <div class="col-sm-6">
+                  <agm-map [latitude]="convertToNumber(bb.__latitude)" [longitude]="convertToNumber(bb.__longitude)">
+                      <agm-marker [latitude]="convertToNumber(bb.__latitude)" [longitude]="convertToNumber(bb.__longitude)"></agm-marker>
+                    </agm-map>
+              </div>
+          </div>  
+      </li>     
+          <a cursor="pointer" *ngIf="isMore" class="btn btn-block list-group-item active" (click)="onLoadMore()"><b>Load more</b></a>          
+    </ul>        
+    </div>
+  </div>
+
+
