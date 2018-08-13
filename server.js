@@ -16,7 +16,7 @@ const path = require('path');
 // so that PathLocationStrategy can be used
 
 app.get('/*', function(req, res) {
-  res.sendFile(path.join('/app/dist/index.html'));
+  res.sendFile(path.join('/app/dist/MyProj/index.html'));
 });
 app.listen(process.env.PORT || 8080);
 
