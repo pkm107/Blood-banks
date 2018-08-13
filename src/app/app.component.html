@@ -9,8 +9,8 @@
     </div>
   </nav>
   <div class="container">   
-    <label class="radio-inline"><input type="radio" name="searchtype" (click)="onCheck(1)" checked>Search by pin</label>
-    <label class="radio-inline"><input type="radio" name="searchtype" (click)="onCheck(2)">Search by city</label>
+    <label class="radio-inline"><input type="radio" name="searchtype" id="searchtype" (click)="onCheck(1)" checked>Search by pin</label>
+    <label class="radio-inline"><input type="radio" name="searchtype" id="searchtype" (click)="onCheck(2)">Search by city</label>
  <br><br>
   <div class="row" *ngIf="isState">
     <div class="col-sm-4">
